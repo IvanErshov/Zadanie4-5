@@ -9,6 +9,27 @@ from sklearn.model_selection import train_test_split
  from tqdm import tqdm
 
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.model_selection import GridSearchCV
+from sklearn.ensemble import RandomForestRegressor
+
+# Определение сетки параметров
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 10, 20],
+    'min_samples_split': [2, 5, 10]
+}
+
+# Инициализация модели
+rf = RandomForestRegressor()
+
+# Инициализация GridSearchCV
+grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5)
+
+# Обучение модели
+grid_search.fit(X_train, y_train)
+
+# Получение лучших параметров
+print("Лучшие параметры:", grid_search.best_params_)
 
 y_true = [3, -0.5, 2, 7]
 y_pred = [2.5, 0.0, 2, 8]
