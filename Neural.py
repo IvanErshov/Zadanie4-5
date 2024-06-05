@@ -1,12 +1,16 @@
 import tkinter as tk 
-
+import time
 import csv 
 
 from sklearn.neural_network import MLPRegressor 
 
 from sklearn.model_selection import train_test_split 
 
- 
+ from tqdm import tqdm
+
+
+
+
 
 # Функция для чтения данных из файла 
 
@@ -78,7 +82,10 @@ def write_data(filename, data):
 
         writer.writerows(data) 
 
- 
+ epochs = 10
+for epoch in tqdm(range(epochs)):
+    
+    
 
 # Функция для прогнозирования затрат с помощью персептрона 
 
@@ -89,7 +96,7 @@ def predict_costs(features, X_train, y_train):
     model.fit(X_train, y_train) 
 
     return model.predict([features])[0] 
-
+            time.sleep(0.1)  # Симуляция времени обучения
  
 
 # Создание главного окна приложения 
